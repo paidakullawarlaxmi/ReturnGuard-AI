@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="card" style="max-width:800px;">
+    <h2>Prediction Dashboard</h2>
+    {% if counts %}
+        <img src="{{ url_for('static', filename='dashboard.png') }}" alt="Dashboard Chart" style="max-width:100%; height:auto;"/>
+        <h3>Counts</h3>
+        <ul>
+            {% for k,v in counts.items() %}
+                <li>{{ k }} : {{ v }}</li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No prediction history available to build dashboard.</p>
+    {% endif %}
+</div>
+{% endblock %}

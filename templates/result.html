@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h2>Prediction Result</h2>
+
+<h1>{{ prediction }}</h1>
+
+<h3>Confidence : {{ confidence }}%</h3>
+
+<hr>
+
+<p><b>Quantity :</b> {{ quantity }}</p>
+
+<p><b>Price :</b> {{ price }}</p>
+
+<p><b>Age :</b> {{ age }}</p>
+
+<p><b>Previous Returns :</b> {{ returns }}</p>
+
+<a href="/predict">
+<button>Predict Again</button>
+</a>
+
+{% endblock %}

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>Prediction History</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+    <h1>Prediction History</h1>
+
+    <table border="1">
+
+        <tr>
+
+            <th>Date</th>
+            <th>Quantity</th>
+            <th>Price</th>
+            <th>Age</th>
+            <th>Previous Returns</th>
+            <th>Prediction</th>
+            <th>Confidence</th>
+
+        </tr>
+
+        {% if records %}
+
+            {% for row in records %}
+
+            <tr>
+
+                <td>{{ row.Date }}</td>
+
+                <td>{{ row.Quantity }}</td>
+
+                <td>{{ row.Price }}</td>
+
+                <td>{{ row.Age }}</td>
+
+                <td>{{ row.PreviousReturns }}</td>
+
+                <td>{{ row.Prediction }}</td>
+
+                <td>{{ row.Confidence }}%</td>
+
+            </tr>
+
+            {% endfor %}
+
+        {% else %}
+
+            <tr>
+
+                <td colspan="7">
+
+                    No prediction history available.
+
+                </td>
+
+            </tr>
+
+        {% endif %}
+
+    </table>
+
+    <br><br>
+
+    <a href="/">🏠 Home</a>
+
+    <br><br>
+
+    <a href="/predict">🔍 Predict Again</a>
+
+</body>
+
+</html>

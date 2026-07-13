@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="card" style="max-width: 800px; margin-bottom: 2rem;">
+    
+    <h2>ReturnGuard AI Dashboard</h2>
+    <img src="{{ url_for('static', filename='fraud_bar.png') }}" width="700">
+    <p class="hero-subtitle">
+        AI-powered Return Fraud Detection System<br>
+        Detect fraudulent return requests instantly using Machine Learning.
+    </p>
+    <a href="/predict" class="btn" style="max-width: 250px; margin: 0 auto; display: block;">Get Started</a>
+</div>
+
+<div class="grid">
+    <div class="feature-card">
+        <h3>📊 Real-Time Prediction</h3>
+        <p>Predict return fraud instantly.</p>
+    </div>
+    
+    <div class="feature-card">
+        <h3>🧠 Machine Learning</h3>
+        <p>Logistic Regression Model.</p>
+    </div>
+    
+    <div class="feature-card">
+        <h3>📁 RAG Investigation</h3>
+        <p>Future AI investigation assistant.</p>
+    </div>
+    
+    <div class="feature-card">
+        <h3>⚡ Flask + Python</h3>
+        <p>Fast and lightweight backend.</p>
+    </div>
+</div>
+
+{% endblock %}

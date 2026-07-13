@@ -1,0 +1,335 @@
+/* Google Font */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+:root {
+    --background: #F5F7FA;
+    --dark: #111827;
+    --primary: #2563EB;
+    --primary-hover: #1D4ED8;
+    --success: #22C55E;
+    --success-bg: #F0FDF4;
+    --warning: #F59E0B;
+    --warning-bg: #FEF3C7;
+    --danger: #EF4444;
+    --danger-bg: #FEF2F2;
+    --border: #E5E7EB;
+    --text-main: #374151;
+    --text-muted: #6B7280;
+    --shadow: 0 8px 20px rgba(0,0,0,0.08);
+    --border-radius: 16px;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Inter', -apple-system, sans-serif;
+    background-color: var(--background);
+    color: var(--text-main);
+    line-height: 1.6;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Navbar */
+nav {
+    background-color: var(--dark);
+    padding: 1.25rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+.nav-logo {
+    color: white;
+    font-size: 1.3rem;
+    font-weight: 700;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+}
+
+.nav-links {
+    display: flex;
+    gap: 1.75rem;
+}
+
+.nav-links a {
+    color: #9CA3AF;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 1rem;
+    transition: color 0.2s ease;
+}
+
+.nav-links a:hover {
+    color: white;
+}
+
+/* Main Container */
+.container {
+    flex: 1;
+    max-width: 900px;
+    width: 100%;
+    margin: 3rem auto;
+    padding: 0 1.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Card Component */
+.card {
+    background-color: white;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    border: 1px solid var(--border);
+    padding: 3rem 2.5rem;
+    width: 100%;
+    max-width: 600px;
+    text-align: center;
+}
+
+h2 {
+    color: var(--dark);
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+}
+
+p {
+    color: var(--text-muted);
+    font-size: 1.05rem;
+    margin-bottom: 1.5rem;
+}
+
+/* Hero elements */
+.hero-subtitle {
+    font-size: 1.15rem;
+    color: var(--text-muted);
+    margin-bottom: 2rem;
+}
+
+/* Form Styles */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    text-align: left;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+label {
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: var(--dark);
+}
+
+input {
+    width: 100%;
+    padding: 0.85rem 1.1rem;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    font-size: 1rem;
+    font-family: inherit;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    background-color: #FAFAFA;
+}
+
+input:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.12);
+    background-color: white;
+}
+
+/* Button Styles */
+button, .btn {
+    display: inline-block;
+    background-color: var(--primary);
+    color: white;
+    font-weight: 600;
+    font-size: 1.05rem;
+    padding: 0.9rem 1.75rem;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background-color 0.2s, transform 0.1s, box-shadow 0.2s;
+    width: 100%;
+    text-align: center;
+}
+
+button:hover, .btn:hover {
+    background-color: var(--primary-hover);
+    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
+}
+
+button:active, .btn:active {
+    transform: scale(0.98);
+}
+
+.btn-secondary {
+    background-color: transparent;
+    color: var(--primary);
+    border: 2px solid var(--primary);
+}
+
+.btn-secondary:hover {
+    background-color: rgba(37, 99, 235, 0.06);
+    box-shadow: none;
+}
+
+/* Result Box */
+.result-box {
+    margin: 2rem 0;
+    padding: 1.5rem;
+    border-radius: 12px;
+    font-weight: 700;
+    font-size: 1.35rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.result-box.fraud {
+    background-color: var(--danger-bg);
+    color: var(--danger);
+    border: 1px dashed var(--danger);
+}
+
+.result-box.warning {
+    background-color: var(--warning-bg);
+    color: var(--warning);
+    border: 1px dashed var(--warning);
+}
+
+.result-box.genuine {
+    background-color: var(--success-bg);
+    color: var(--success);
+    border: 1px dashed var(--success);
+}
+
+/* Detail Table Row */
+.detail-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.9rem 0.25rem;
+    border-bottom: 1px solid var(--border);
+    font-size: 1rem;
+}
+
+.detail-row span:first-child {
+    color: var(--text-muted);
+    font-weight: 500;
+}
+
+.detail-row span:last-child {
+    color: var(--dark);
+    font-weight: 600;
+}
+
+/* Grid layout for features */
+.grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.75rem;
+    width: 100%;
+    max-width: 800px;
+    margin-top: 3rem;
+}
+
+@media (min-width: 640px) {
+    .grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+.feature-card {
+    background: white;
+    border: 1px solid var(--border);
+    padding: 1.75rem;
+    border-radius: var(--border-radius);
+    text-align: left;
+    box-shadow: var(--shadow);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.feature-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.1);
+}
+
+.feature-card h3 {
+    margin-bottom: 0.6rem;
+    color: var(--dark);
+    font-size: 1.25rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.feature-card p {
+    font-size: 0.95rem;
+    margin-bottom: 0;
+}
+
+/* Checkmark Lists for About Page */
+.section-title {
+    font-size: 1.35rem;
+    color: var(--dark);
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    text-align: left;
+    border-bottom: 2px solid var(--border);
+    padding-bottom: 0.5rem;
+}
+
+.checklist {
+    text-align: left;
+    margin-bottom: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.checklist-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 1.05rem;
+    color: var(--text-main);
+}
+
+.checklist-item .tick {
+    color: var(--success);
+    font-weight: 700;
+}
+
+/* Footer styling */
+footer {
+    background-color: var(--dark);
+    color: #6B7280;
+    text-align: center;
+    padding: 1.5rem 0;
+    font-size: 0.9rem;
+    border-top: 1px solid #1F2937;
+    margin-top: auto;
+}
+
+footer p {
+    margin-bottom: 0;
+    color: #9CA3AF;
+}

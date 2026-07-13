@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Retail Dataset</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+<h1>Retail Dataset</h1>
+
+<table border="1">
+
+<tr>
+
+{% for col in columns %}
+
+<th>{{ col }}</th>
+
+{% endfor %}
+
+</tr>
+
+{% for row in records %}
+
+<tr>
+
+{% for col in columns %}
+
+<td>{{ row[col] }}</td>
+
+{% endfor %}
+
+</tr>
+
+{% endfor %}
+
+</table>
+
+<br>
+
+<a href="/">Home</a>
+
+</body>
+
+</html>
