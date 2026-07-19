@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<title>ReturnGuard AI Dashboard</title>
+
+<style>
+
+body{
+
+font-family:Arial;
+
+background:#f4f4f4;
+
+padding:40px;
+
+}
+
+.container{
+
+display:grid;
+
+grid-template-columns:repeat(3,1fr);
+
+gap:20px;
+
+}
+
+.card{
+
+background:white;
+
+padding:25px;
+
+border-radius:10px;
+
+box-shadow:0px 0px 10px gray;
+
+text-align:center;
+
+}
+
+h1{
+
+text-align:center;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<h1>ReturnGuard AI Dashboard</h1>
+
+<div class="container">
+
+<div class="card">
+
+<h2>Total Transactions</h2>
+
+<h1>{{total_transactions}}</h1>
+
+</div>
+
+<div class="card">
+
+<h2>Total Revenue</h2>
+
+<h1>{{total_revenue}}</h1>
+
+</div>
+
+<div class="card">
+
+<h2>Total Products</h2>
+
+<h1>{{total_products}}</h1>
+
+</div>
+
+<div class="card">
+
+<h2>Total Countries</h2>
+
+<h1>{{total_countries}}</h1>
+
+</div>
+
+<div class="card">
+
+<h2>Fraud Cases</h2>
+
+<h1>{{fraud_cases}}</h1>
+
+</div>
+
+<div class="card">
+
+<h2>Safe Cases</h2>
+
+<h1>{{safe_cases}}</h1>
+
+</div>
+
+</div>
+
+</body>
+
+</html>

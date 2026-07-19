@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<title>ReturnGuard AI</title>
+
+</head>
+
+<body>
+
+<h1>ReturnGuard AI</h1>
+
+<form>
+
+<input
+type="text"
+name="search"
+placeholder="Search Stock Code"
+value="{{ search if search else '' }}">
+
+<button>
+
+Search
+
+</button>
+
+</form>
+
+<table border="1">
+
+<tr>
+
+{% for key in records[0].keys() %}
+
+<th>{{ key }}</th>
+
+{% endfor %}
+
+</tr>
+
+{% for row in records %}
+
+<tr>
+
+{% for value in row.values() %}
+
+<td>{{ value }}</td>
+
+{% endfor %}
+
+</tr>
+
+{% endfor %}
+
+</table>
+
+</body>
+
+</html>
