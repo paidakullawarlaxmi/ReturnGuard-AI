@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="welcome-banner">
+    <div class="welcome-text">
+        <h1>Investigation Reports</h1>
+        <p>Generate, download, and review standard compliance assets and reports for internal audit trails.</p>
+    </div>
+</div>
+
+<div class="grid-2" style="margin-top: 10px;">
+    <!-- PDF Reports Card -->
+    <div class="card" style="display: flex; flex-direction: column; justify-content: space-between;">
+        <div>
+            <h3 class="card-title">📄 PDF Audit Investigation Report</h3>
+            <p class="card-subtitle" style="margin-bottom: 20px;">Downloads a professional-grade PDF documentation report detailing the parameters of the most recent prediction scan. This is ideal for internal filing and record-keeping.</p>
+            
+            <div style="background: rgba(15, 23, 42, 0.4); border: 1px solid var(--border-glass); border-radius: var(--border-radius-md); padding: 20px; margin-bottom: 25px;">
+                <h4 style="font-size: 0.9rem; font-weight: 700; color: white; margin-bottom: 10px;">PDF Contents Include:</h4>
+                <ul style="color: var(--text-muted); font-size: 0.9rem; padding-left: 20px; display: flex; flex-direction: column; gap: 8px;">
+                    <li>Transaction Classification (Low / High Fraud)</li>
+                    <li>Classification Confidence Percentage</li>
+                    <li>Input variables (Quantity, Price, Age, Previous Returns)</li>
+                    <li>Security compliance recommendations</li>
+                </ul>
+            </div>
+        </div>
+
+        <a href="/reports/pdf" class="btn" style="width: 100%;">📥 Download PDF Report</a>
+    </div>
+
+    <!-- Email Notification Card -->
+    <div class="card" style="display: flex; flex-direction: column; justify-content: space-between;">
+        <div>
+            <h3 class="card-title">✉️ Email Alerts Draft</h3>
+            <p class="card-subtitle" style="margin-bottom: 20px;">Review and copy the pre-formatted compliance notification email text draft sent to risk officers and account managers.</p>
+            
+            <div style="background: rgba(15, 23, 42, 0.4); border: 1px solid var(--border-glass); border-radius: var(--border-radius-md); padding: 15px; margin-bottom: 25px; font-family: monospace; font-size: 0.85rem; color: var(--text-main); white-space: pre-wrap; text-align: left; max-height: 180px; overflow-y: auto; border: 1px solid var(--border-glass);">{{ email_content }}</div>
+        </div>
+
+        <a href="/reports/email" class="btn btn-secondary" style="width: 100%;">📥 Download Email Text</a>
+    </div>
+</div>
+{% endblock %}

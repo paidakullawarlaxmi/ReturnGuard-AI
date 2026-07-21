@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>ReturnGuard AI</title>
+
+<style>
+
+body{
+
+font-family:Arial;
+
+background:#f5f5f5;
+
+margin:40px;
+
+}
+
+h1{
+
+text-align:center;
+
+color:green;
+
+}
+
+table{
+
+border-collapse:collapse;
+
+width:100%;
+
+background:white;
+
+}
+
+th{
+
+background:#222;
+
+color:white;
+
+padding:10px;
+
+}
+
+td{
+
+border:1px solid gray;
+
+padding:8px;
+
+text-align:center;
+
+}
+
+tr:nth-child(even){
+
+background:#eeeeee;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<h1>ReturnGuard AI</h1>
+
+<h2>Fraud Case History</h2>
+
+<table>
+
+<tr>
+
+{% for key in records[0].keys() %}
+
+<th>{{ key }}</th>
+
+{% endfor %}
+
+</tr>
+
+{% for row in records %}
+
+<tr>
+
+{% for value in row.values() %}
+
+<td>{{ value }}</td>
+
+{% endfor %}
+
+</tr>
+
+{% endfor %}
+
+</table>
+
+</body>
+
+</html>

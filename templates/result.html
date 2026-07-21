@@ -1,0 +1,91 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="card" style="max-width: 700px; margin: 0 auto; text-align: center;">
+    <h2 class="card-title" style="justify-content: center; font-size: 1.8rem; margin-bottom: 20px;">🛡️ Prediction Analysis</h2>
+
+    <div class="result-container">
+        {% if prediction == 'LOW FRAUD' or 'LOW' in prediction %}
+            <div class="result-value low">🟢 LOW FRAUD</div>
+        {% else %}
+            <div class="result-value high">🚨 HIGH FRAUD</div>
+        {% endif %}
+
+        <div class="confidence-circle">
+            <div class="confidence-val">{{ confidence }}%</div>
+            <div class="confidence-lbl">Confidence</div>
+        </div>
+
+        <div style="margin-top: 10px;">
+            <h4 style="color: var(--text-muted); text-transform: uppercase; font-size: 0.85rem; letter-spacing: 0.05em;">Recommendation</h4>
+            <p style="font-size: 1.35rem; font-weight: 700; color: white; margin-top: 5px;">{{ recommendation }}</p>
+        </div>
+    </div>
+
+    <hr style="border: 0; height: 1px; background: var(--border-glass); margin: 30px 0;">
+
+    <div class="card" style="background: rgba(15, 23, 42, 0.4); border: 1px solid var(--border-glass); padding: 20px; margin-bottom: 25px; box-shadow: none;">
+        <h3 class="card-title" style="font-size: 1.15rem; margin-bottom: 8px;">📊 Input Variables</h3>
+        <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; text-align: left; font-size: 0.95rem;">
+            <div><span style="color: var(--text-muted);">Quantity:</span> <strong style="color: white;">{{ quantity }}</strong></div>
+            <div><span style="color: var(--text-muted);">Unit Price:</span> <strong style="color: white;">${{ price }}</strong></div>
+            <div><span style="color: var(--text-muted);">Customer Age:</span> <strong style="color: white;">{{ age }} years</strong></div>
+            <div><span style="color: var(--text-muted);">Previous Returns:</span> <strong style="color: white;">{{ returns }} returns</strong></div>
+        </div>
+    </div>
+
+    <div class="shap-container">
+        <h3 class="card-title" style="font-size: 1.25rem; margin-bottom: 4px;">🧠 Explainable AI (SHAP Feature Importance)</h3>
+        <p class="card-subtitle" style="margin-bottom: 15px;">Relative contribution of individual inputs to this specific AI prediction.</p>
+        
+        <!-- Quantity Bar -->
+        <div class="shap-row">
+            <div class="shap-label-container">
+                <span style="color: var(--text-main);">Quantity</span>
+                <span style="color: var(--primary);">{{ shap_vals.quantity }}%</span>
+            </div>
+            <div class="shap-bar-bg">
+                <div class="shap-bar-fill {% if 'HIGH' in prediction %}high{% endif %}" style="width: {{ shap_vals.quantity }}%;"></div>
+            </div>
+        </div>
+
+        <!-- Price Bar -->
+        <div class="shap-row">
+            <div class="shap-label-container">
+                <span style="color: var(--text-main);">UnitPrice</span>
+                <span style="color: var(--primary);">{{ shap_vals.price }}%</span>
+            </div>
+            <div class="shap-bar-bg">
+                <div class="shap-bar-fill {% if 'HIGH' in prediction %}high{% endif %}" style="width: {{ shap_vals.price }}%;"></div>
+            </div>
+        </div>
+
+        <!-- Age Bar -->
+        <div class="shap-row">
+            <div class="shap-label-container">
+                <span style="color: var(--text-main);">CustomerAge</span>
+                <span style="color: var(--primary);">{{ shap_vals.age }}%</span>
+            </div>
+            <div class="shap-bar-bg">
+                <div class="shap-bar-fill {% if 'HIGH' in prediction %}high{% endif %}" style="width: {{ shap_vals.age }}%;"></div>
+            </div>
+        </div>
+
+        <!-- Previous Returns Bar -->
+        <div class="shap-row">
+            <div class="shap-label-container">
+                <span style="color: var(--text-main);">PreviousReturns</span>
+                <span style="color: var(--primary);">{{ shap_vals.returns }}%</span>
+            </div>
+            <div class="shap-bar-bg">
+                <div class="shap-bar-fill {% if 'HIGH' in prediction %}high{% endif %}" style="width: {{ shap_vals.returns }}%;"></div>
+            </div>
+        </div>
+    </div>
+
+    <div style="display: flex; gap: 15px; margin-top: 40px; justify-content: center; flex-wrap: wrap;">
+        <a href="/reports" class="btn">📄 Download PDF / Email</a>
+        <a href="/predict" class="btn btn-secondary">🔍 Predict Another</a>
+    </div>
+</div>
+{% endblock %}

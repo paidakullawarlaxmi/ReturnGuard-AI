@@ -1,0 +1,18 @@
+Subject: Return Fraud Investigation Alert - Order scan
+Prediction: LOW FRAUD
+Confidence: 96.0%
+Recommendation: Approve Return
+Timestamp: 2026-07-20 00:15:58
+User Account: laxmi_paidakullawar
+
+Transaction Parameters:
+  - Quantity Returned: 25 items
+  - Unit Price: $5.00
+  - Account Holder Age: 12 years
+  - Previous Returns: 20 completed
+
+Risk Assessment Weights (SHAP Impact):
+  - Quantity: 35%
+  - Unit Price: 10%
+  - Account Age: 16%
+  - Previous Returns: 66%

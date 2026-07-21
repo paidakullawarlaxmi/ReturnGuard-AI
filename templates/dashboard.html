@@ -1,0 +1,79 @@
+﻿{% extends "base.html" %}
+
+{% block content %}
+<div class="welcome-banner">
+    <div class="welcome-text">
+        <h1>Dashboard Overview</h1>
+        <p>Welcome, <strong>{{ session.get('username', 'Laxmi') }}</strong> ðŸ‘‹ | System role: <strong>{{ session.get('role', 'Investigator') | upper }}</strong></p>
+    </div>
+    <div>
+        <span class="badge badge-low" style="font-size: 0.9rem; padding: 8px 16px;">ðŸŸ¢ System Status: OPERATIONAL</span>
+    </div>
+</div>
+
+<!-- Mini Stats Grid -->
+<div class="grid-4" style="margin-top: 10px; margin-bottom: 10px;">
+    <div class="stat-card">
+        <div class="stat-title"> Today's Fraud Cases</div>
+        <div class="stat-value" style="color: var(--danger);">{{ stats.high_fraud }}</div>
+    </div>
+    
+    <div class="stat-card">
+        <div class="stat-title">Safe Returns Approved</div>
+        <div class="stat-value" style="color: var(--success);">{{ stats.low_fraud }}</div>
+    </div>
+    
+    <div class="stat-card">
+        <div class="stat-title"> Model Accuracy</div>
+        <div class="stat-value" style="color: var(--primary);">97%</div>
+    </div>
+    
+    <div class="stat-card">
+        <div class="stat-title"> Logged In Users</div>
+        <div class="stat-value" style="color: #c084fc;">{{ stats.active_users }}</div>
+    </div>
+</div>
+
+<div class="grid-2">
+    <!-- Fraud Prediction Plot Card -->
+    <div class="card" style="text-align: center;">
+        <h3 class="card-title"> Fraud Analytics Chart</h3>
+        <p class="card-subtitle" style="margin-bottom: 20px;">Ratio of approved low-risk returns vs flagged high-risk investigations.</p>
+        
+        {% if stats.has_chart %}
+            <div style="background: rgba(255, 255, 255, 0.02); border-radius: var(--border-radius-md); padding: 10px; border: 1px solid var(--border-glass);">
+                <img src="{{ url_for('static', filename='images/fraud_bar.png') }}?t={{ stats.timestamp }}" alt="Fraud Distribution Chart" style="max-width: 100%; border-radius: var(--border-radius-sm); filter: drop-shadow(0 4px 10px rgba(0,0,0,0.3));">
+            </div>
+        {% else %}
+            <div style="padding: 60px 20px; color: var(--text-muted);">
+                <p>ðŸ“Š Analytics plot will generate after prediction data is scanned.</p>
+            </div>
+        {% endif %}
+    </div>
+
+    <!-- Recent System Activity Logs Card -->
+    <div class="card">
+        <h3 class="card-title">Recent Logins & System Activity</h3>
+        <p class="card-subtitle" style="margin-bottom: 15px;">Latest system logs written to the database audit trail.</p>
+        
+        {% if logs %}
+            <div style="display: flex; flex-direction: column; gap: 12px; max-height: 360px; overflow-y: auto; padding-right: 5px;">
+                {% for log in logs %}
+                    <div style="background: rgba(15, 23, 42, 0.3); border: 1px solid var(--border-glass); border-radius: var(--border-radius-md); padding: 12px; font-size: 0.85rem; display: flex; flex-direction: column; gap: 4px;">
+                        <div style="display: flex; justify-content: space-between;">
+                            <span style="font-weight: 700; color: var(--primary);">{{ log.username }}</span>
+                            <span style="color: var(--text-muted); font-size: 0.8rem;">{{ log.time }}</span>
+                        </div>
+                        <div style="color: var(--text-main); font-weight: 500;">{{ log.activity }}</div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <div style="padding: 40px 20px; text-align: center; color: var(--text-muted);">
+                No system logs logged yet.
+            </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
+

@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="card" style="max-width: 480px; margin: 40px auto;">
+    <h2 class="card-title" style="justify-content: center; font-size: 1.8rem; margin-bottom: 8px;">👤 Register Account</h2>
+    <p class="card-subtitle" style="text-align: center; margin-bottom: 24px;">Create your credentials to join ReturnGuard AI.</p>
+
+    {% if error %}
+        <div style="background-color: var(--danger-bg); color: var(--danger); border: 1px solid var(--danger-border); padding: 12px; border-radius: var(--border-radius-md); margin-bottom: 20px; text-align: center; font-size: 0.9rem; font-weight: 600;">
+            {{ error }}
+        </div>
+    {% endif %}
+
+    <form action="/signup" method="POST">
+        <div class="form-group">
+            <label for="username">Username</label>
+            <input type="text" id="username" name="username" placeholder="Choose a username" required>
+        </div>
+
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" placeholder="Choose a secure password" required>
+        </div>
+
+        <div class="form-group" style="margin-bottom: 24px;">
+            <label for="role">System Role</label>
+            <select id="role" name="role" style="background-color: rgba(15, 23, 42, 0.6); border: 1px solid var(--border-glass); border-radius: var(--border-radius-md); padding: 14px 16px; color: white; font-size: 1rem; font-family: var(--font-body); width: 100%; cursor: pointer;">
+                <option value="admin" style="background-color: var(--bg-surface-solid);">Admin (Full Access)</option>
+                <option value="user" style="background-color: var(--bg-surface-solid);" selected>Investigator / User</option>
+            </select>
+        </div>
+
+        <button type="submit" style="width: 100%;">Create Account</button>
+    </form>
+
+    <div style="margin-top: 24px; text-align: center; font-size: 0.9rem;">
+        <span style="color: var(--text-muted);">Already have an account? </span>
+        <a href="/login" style="color: var(--primary); text-decoration: none; font-weight: 600;">Sign in here</a>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,90 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="card">
+    <h2 class="card-title">⏳ Prediction History</h2>
+    <p class="card-subtitle">Review all historical return transaction scans logged in our SQLite database. Use search filters to isolate specific results.</p>
+
+    <!-- Search/Filter Bar -->
+    <div style="background: rgba(15, 23, 42, 0.4); border: 1px solid var(--border-glass); border-radius: var(--border-radius-md); padding: 20px; margin-bottom: 25px;">
+        <form id="filter-form" method="GET" action="/history" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 15px;">
+            <div class="form-group" style="margin-bottom: 0;">
+                <label for="prediction-filter" style="font-size: 0.75rem;">Fraud Level</label>
+                <select id="prediction-filter" name="prediction" style="background-color: rgba(15, 23, 42, 0.6); border: 1px solid var(--border-glass); border-radius: var(--border-radius-sm); padding: 10px; color: white; font-size: 0.9rem; cursor: pointer;">
+                    <option value="" {% if not req_prediction %}selected{% endif %}>All Predictions</option>
+                    <option value="LOW" {% if req_prediction == 'LOW' %}selected{% endif %}>Low Fraud</option>
+                    <option value="HIGH" {% if req_prediction == 'HIGH' %}selected{% endif %}>High Fraud</option>
+                </select>
+            </div>
+            
+            <div class="form-group" style="margin-bottom: 0;">
+                <label for="search-query" style="font-size: 0.75rem;">Min Price ($)</label>
+                <input type="number" step="0.01" id="min-price" name="min_price" value="{{ req_min_price or '' }}" placeholder="e.g. 50.00" style="padding: 10px; font-size: 0.9rem; border-radius: var(--border-radius-sm);">
+            </div>
+
+            <div class="form-group" style="margin-bottom: 0; display: flex; align-items: flex-end;">
+                <button type="submit" style="padding: 11px; font-size: 0.9rem; width: 100%; height: 42px;">🔍 Apply Filter</button>
+            </div>
+            
+            {% if req_prediction or req_min_price %}
+            <div class="form-group" style="margin-bottom: 0; display: flex; align-items: flex-end;">
+                <a href="/history" class="btn btn-secondary" style="padding: 11px; font-size: 0.9rem; width: 100%; height: 42px; line-height: 20px;">Reset</a>
+            </div>
+            {% endif %}
+        </form>
+    </div>
+
+    <!-- History Table -->
+    {% if records %}
+        <div style="overflow-x: auto;">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Order ID</th>
+                        <th>Date Scan</th>
+                        <th>Qty</th>
+                        <th>Price</th>
+                        <th>Age</th>
+                        <th>Prev Returns</th>
+                        <th>Prediction</th>
+                        <th>Confidence</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for row in records %}
+                        <tr>
+                            <td><strong>RG-{{ "%04d" | format(row.id) }}</strong></td>
+                            <td style="color: var(--text-muted);">{{ row.timestamp }}</td>
+                            <td>{{ row.quantity }}</td>
+                            <td>${{ "%.2f" | format(row.price) }}</td>
+                            <td>{{ row.age }}</td>
+                            <td>{{ row.previous_returns }}</td>
+                            <td>
+                                {% if 'LOW' in row.prediction.upper() %}
+                                    <span class="badge badge-low">🟢 Low Fraud</span>
+                                {% else %}
+                                    <span class="badge badge-high">🚨 High Fraud</span>
+                                {% endif %}
+                            </td>
+                            <td><strong>{{ row.confidence }}%</strong></td>
+                            <td>
+                                {% if 'LOW' in row.prediction.upper() %}
+                                    <span style="color: var(--success); font-weight: 600;">Approved</span>
+                                {% else %}
+                                    <span style="color: var(--danger); font-weight: 600;">Under Audit</span>
+                                {% endif %}
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    {% else %}
+        <div style="text-align: center; padding: 40px 20px; color: var(--text-muted);">
+            <p style="font-size: 1.1rem; margin-bottom: 10px;">📭 No transaction history matches the criteria.</p>
+            <p style="font-size: 0.9rem;">Submit a prediction scan to view records here.</p>
+        </div>
+    {% endif %}
+</div>
+{% endblock %}

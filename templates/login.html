@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="card" style="max-width: 480px; margin: 40px auto;">
+    <h2 class="card-title" style="justify-content: center; font-size: 1.8rem; margin-bottom: 8px;">🔐 Secure Login</h2>
+    <p class="card-subtitle" style="text-align: center; margin-bottom: 24px;">Please enter your credentials to access ReturnGuard AI.</p>
+
+    {% if error %}
+        <div style="background-color: var(--danger-bg); color: var(--danger); border: 1px solid var(--danger-border); padding: 12px; border-radius: var(--border-radius-md); margin-bottom: 20px; text-align: center; font-size: 0.9rem; font-weight: 600;">
+            {{ error }}
+        </div>
+    {% endif %}
+    {% if msg %}
+        <div style="background-color: var(--success-bg); color: var(--success); border: 1px solid var(--success-border); padding: 12px; border-radius: var(--border-radius-md); margin-bottom: 20px; text-align: center; font-size: 0.9rem; font-weight: 600;">
+            {{ msg }}
+        </div>
+    {% endif %}
+
+    <form action="/login" method="POST">
+        <div class="form-group">
+            <label for="username">Username</label>
+            <input type="text" id="username" name="username" placeholder="Enter username (e.g. Laxmi)" required>
+        </div>
+
+        <div class="form-group" style="margin-bottom: 24px;">
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" placeholder="Enter password" required>
+        </div>
+
+        <button type="submit" style="width: 100%;">Access Account</button>
+    </form>
+
+    <div style="margin-top: 24px; text-align: center; font-size: 0.9rem;">
+        <span style="color: var(--text-muted);">Don't have an account? </span>
+        <a href="/signup" style="color: var(--primary); text-decoration: none; font-weight: 600;">Create account</a>
+    </div>
+</div>
+{% endblock %}
